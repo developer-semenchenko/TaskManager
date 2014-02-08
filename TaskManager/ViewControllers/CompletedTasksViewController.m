@@ -9,30 +9,92 @@
 #import "CompletedTasksViewController.h"
 
 @interface CompletedTasksViewController ()
-
+{
+    NSArray *completedTasks;
+}
 @end
 
 @implementation CompletedTasksViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+#pragma mark - Helper methods
+-(void)lockTableView{
+    [self.tableView setUserInteractionEnabled:NO];
 }
 
+-(void)unlockTableView{
+    [self.tableView setUserInteractionEnabled:YES];
+}
+
+#pragma mark - Default methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(lockTableView) name:@"lockTableView" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(unlockTableView) name:@"unlockTableView" object:nil];
+    
+    completedTasks = [CompletedTasksIO loadCompletedTasksFromFile];
+    self.textLable.text = [[NSString alloc] initWithFormat:@"Total completed tasks: %d", [completedTasks count]];
+    
+    // TableView customization
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    self.tableView.separatorColor = [UIColor grayColor];
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.118f green:0.157f blue:0.208f alpha:1.0f];
+    
+    // Hide unused cells
+    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
+    // To show last cell
+    _tableView.contentInset = UIEdgeInsetsMake(0, 0, 70, 0);
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - UITableViewDataDelegate protocol methods
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70.0f;
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    cell.backgroundColor = [UIColor colorWithRed:0.3 green:0.35 blue:0.4 alpha:1.0];}
+
+#pragma mark - UITableViewDataSource protocol methods
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return completedTasks.count;
+}
+
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //NSString *ident = @"cell";
+    
+    // Re-use or create a cell
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ident forIndexPath:indexPath];
+    
+    static NSString *simpleTableIdentifier = @"cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    
+    // Find the task item for this index
+    int index = [indexPath row];
+    NSDictionary *taskDictionary = [completedTasks objectAtIndex:index];
+    NSString *taskText = [taskDictionary objectForKey:@"Task text"];
+    
+    // Set the text and other customization
+    cell.textLabel.text = taskText;
+    cell.textLabel.backgroundColor = [UIColor clearColor];
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
+    return cell;
 }
 
 @end

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CompletedTasksIO.h"
 
-@interface CompletedTasksViewController : UIViewController
+@interface CompletedTasksViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UILabel *textLable;
 
 @end

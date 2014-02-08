@@ -12,8 +12,8 @@
 
 //@property(strong, nonatomic) NSMutableArray *tasksArray;
 
--(NSArray *)loadTasksFromFile;
--(void)addTasksToFile:(NSDictionary *) tasksDictionary;
--(void)saveTaskArray:(NSMutableArray *) taskArray;
++(NSArray *)loadTasksFromFile;
++(void)addTasksToFile:(NSDictionary *) tasksDictionary;
++(void)saveTaskArray:(NSMutableArray *) taskArray;
 
 @end

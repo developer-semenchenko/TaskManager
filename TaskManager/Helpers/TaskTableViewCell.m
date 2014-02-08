@@ -47,7 +47,7 @@ const float UI_CUES_WIDTH = 50.0f;
     return self;
 }
 
-// utility method for creating the contextual cues
+// Utility method for creating the contextual cues
 -(UILabel*) createCueLabel {
     UILabel* label = [[UILabel alloc] initWithFrame:CGRectNull];
     label.textColor = [UIColor whiteColor];
@@ -94,12 +94,12 @@ const float UI_CUES_WIDTH = 50.0f;
         _deleteOnDragRelease = self.frame.origin.x < -self.frame.size.width / 2;
         _completeOnDragRelease = self.frame.origin.x > self.frame.size.width / 2;
         
-        // fade the contextual cues
+        // Fade the contextual cues
         float cueAlpha = fabsf(self.frame.origin.x) / (self.frame.size.width / 2);
         _tickLabel.alpha = cueAlpha;
         _crossLabel.alpha = cueAlpha;
         
-        // indicate when the item have been pulled far enough to invoke the given action
+        // Indicate when the item have been pulled far enough to invoke the given action
         _tickLabel.textColor = _completeOnDragRelease ?
         [UIColor greenColor] : [UIColor whiteColor];
         _crossLabel.textColor = _deleteOnDragRelease ?
@@ -115,8 +115,9 @@ const float UI_CUES_WIDTH = 50.0f;
         // If task completed
         if (_completeOnDragRelease) {
             
-            // mark the item as complete and update the UI state
+            // Mark the item as complete and update the UI state
             NSLog(@"Completed");
+            [self.delegate taskCompleted:self.taskItem];
         }
         
         // If task deleted
@@ -129,7 +130,7 @@ const float UI_CUES_WIDTH = 50.0f;
              ];
         }
         else{
-                // notify the delegate that this item should be deleted
+                // Notify the delegate that this item should be deleted
                 [self.delegate taskDeleted:self.taskItem];
         }
     }

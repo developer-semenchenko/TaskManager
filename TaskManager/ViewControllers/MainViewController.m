@@ -15,10 +15,51 @@ BOOL isShowingSideView = NO;
 
 @implementation MainViewController
 
+#pragma  mark - Defaul View life cycle methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    
+    _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    
+    // Checking first time launch
+    if ([userDefaults boolForKey:@"firstLaunch"])
+    {
+        // app already launched
+        
+    }
+    else
+    {
+        
+        // Hiding UI
+        _topPanel.alpha = 0;
+        _sideButton.alpha = 0;
+        _twButton.alpha = 0;
+        _fbButton.alpha = 0;
+        _addButton.alpha = 0;
+        _containerView.alpha = 0;
+        
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        // Create page view controller
+        self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+        self.pageViewController.dataSource = self;
+        
+        PageContentViewController *startingViewController = [self viewControllerAtIndex:0];
+        NSArray *viewControllers = @[startingViewController];
+        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+        
+        // Change the size of page view controller
+        self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        
+        [self addChildViewController:_pageViewController];
+        [self.view addSubview:_pageViewController.view];
+        [self.pageViewController didMoveToParentViewController:self];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -34,6 +75,63 @@ BOOL isShowingSideView = NO;
     }
 }
 
+
+#pragma mark - PageView methods
+- (NSInteger)presentationCountForPageViewController:(UIPageViewController *)pageViewController
+{
+    return [self.pageTitles count];
+}
+
+- (NSInteger)presentationIndexForPageViewController:(UIPageViewController *)pageViewController
+{
+    return 0;
+}
+
+- (PageContentViewController *)viewControllerAtIndex:(NSUInteger)index
+{
+    if (([self.pageTitles count] == 0) || (index >= [self.pageTitles count])) {
+        return nil;
+    }
+    
+    // Create a new view controller and pass suitable data.
+    PageContentViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageContentViewController"];
+    pageContentViewController.labelText = self.pageTitles[index];
+    pageContentViewController.pageIndex = index;
+    
+    return pageContentViewController;
+}
+
+
+#pragma mark - Page View Controller Data Source
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerBeforeViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    
+    if ((index == 0) || (index == NSNotFound)) {
+        return nil;
+    }
+    
+    index--;
+    return [self viewControllerAtIndex:index];
+}
+
+- (UIViewController *)pageViewController:(UIPageViewController *)pageViewController viewControllerAfterViewController:(UIViewController *)viewController
+{
+    NSUInteger index = ((PageContentViewController*) viewController).pageIndex;
+    
+    if (index == NSNotFound) {
+        return nil;
+    }
+    
+    index++;
+    if (index == [self.pageTitles count]) {
+        return nil;
+    }
+    return [self viewControllerAtIndex:index];
+}
+
+#pragma mark - TopPanel methods
 - (IBAction)showSidePanel:(id)sender {
     CGRect newMainViewFrame = _mainView.frame;
     newMainViewFrame.origin.x += 70;
@@ -47,7 +145,6 @@ BOOL isShowingSideView = NO;
     if (!isShowingSideView){
     [UIView animateWithDuration:0.5 animations:^{
         _mainView.frame = newMainViewFrame;
-       //_slidePanel.layer.transform = rotationAndPerspectiveTransform;
         _sidePanel.alpha = 1.0f;
         _buttonTasks.alpha = 1.0f;
         _buttonCompletedTasks.alpha = 1.0f;
@@ -61,7 +158,6 @@ BOOL isShowingSideView = NO;
     else{
         [UIView animateWithDuration:0.5 animations:^{
             _mainView.frame = self.view.frame;
-            //_slidePanel.layer.transform = rotationAndPerspectiveTransform;
             _sidePanel.alpha = 0.0f;
             _buttonTasks.alpha = 0.0f;
             _buttonCompletedTasks.alpha = 0.0f;
@@ -74,12 +170,14 @@ BOOL isShowingSideView = NO;
 }
 
 - (IBAction)addTask:(id)sender {
-    TasksIO *tasks = [[TasksIO alloc] init];
-    NSMutableArray *tasksArray = [[tasks loadTasksFromFile] mutableCopy];
+    
+    NSMutableArray *tasksArray = [[TasksIO loadTasksFromFile] mutableCopy];
+
     NSString *taskText = [[NSString alloc] initWithFormat:@"Task text %d", [tasksArray count]];
     NSDictionary *newTask = [[NSDictionary alloc] initWithObjectsAndKeys: taskText, @"Task text", nil];
     [tasksArray insertObject:newTask atIndex:0];
-    [tasks saveTaskArray:tasksArray];
+    [TasksIO saveTaskArray:tasksArray];
+
     [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadTableView" object:nil];
 }
 
@@ -88,7 +186,6 @@ BOOL isShowingSideView = NO;
     [self.containerViewController swapToTasks];
     [UIView animateWithDuration:0.3 animations:^{
         _mainView.frame = self.view.frame;
-        //_slidePanel.layer.transform = rotationAndPerspectiveTransform;
         _sidePanel.alpha = 0.0f;
         _buttonTasks.alpha = 0.0f;
         _buttonCompletedTasks.alpha = 0.0f;
@@ -102,7 +199,6 @@ BOOL isShowingSideView = NO;
     [self.containerViewController swapToCompletedTasks];
     [UIView animateWithDuration:0.3 animations:^{
         _mainView.frame = self.view.frame;
-        //_slidePanel.layer.transform = rotationAndPerspectiveTransform;
         _sidePanel.alpha = 0.0f;
         _buttonTasks.alpha = 0.0f;
         _buttonCompletedTasks.alpha = 0.0f;
@@ -116,7 +212,6 @@ BOOL isShowingSideView = NO;
     [self.containerViewController swapToOptions];
     [UIView animateWithDuration:0.3 animations:^{
         _mainView.frame = self.view.frame;
-        //_slidePanel.layer.transform = rotationAndPerspectiveTransform;
         _sidePanel.alpha = 0.0f;
         _buttonTasks.alpha = 0.0f;
         _buttonCompletedTasks.alpha = 0.0f;
@@ -130,7 +225,6 @@ BOOL isShowingSideView = NO;
     [self.containerViewController swapToAbout];
     [UIView animateWithDuration:0.3 animations:^{
         _mainView.frame = self.view.frame;
-        //_slidePanel.layer.transform = rotationAndPerspectiveTransform;
         _sidePanel.alpha = 0.0f;
         _buttonTasks.alpha = 0.0f;
         _buttonCompletedTasks.alpha = 0.0f;
@@ -142,8 +236,9 @@ BOOL isShowingSideView = NO;
 
 #pragma mark - Sharing methods
 - (IBAction)sharingToTwitter:(id)sender {
-    TasksIO *tasks = [[TasksIO alloc] init];
-    NSArray *tasksArray = [tasks loadTasksFromFile];
+    
+    NSArray *tasksArray = [TasksIO loadTasksFromFile];
+
     int tasksCount = [tasksArray count];
     
     NSString *tweetText = [[NSString alloc] initWithFormat:@"Now I have %d tasks.. I must done all of this withing 24h!", tasksCount];
@@ -167,8 +262,9 @@ BOOL isShowingSideView = NO;
 }
 
 - (IBAction)sharingToFacebook:(id)sender {
-    TasksIO *tasks = [[TasksIO alloc] init];
-    NSArray *tasksArray = [tasks loadTasksFromFile];
+
+    NSArray *tasksArray = [TasksIO loadTasksFromFile];
+
     int tasksCount = [tasksArray count];
     
     NSString *facebookText = [[NSString alloc] initWithFormat:@"Now I have %d tasks.. I must done all of this withing 24h!", tasksCount];
@@ -183,7 +279,7 @@ BOOL isShowingSideView = NO;
     {
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Sorry"
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Twitter account setup"
+                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Facebook account setup"
                                   delegate:self
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];

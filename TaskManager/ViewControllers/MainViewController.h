@@ -11,16 +11,28 @@
 #import "TasksIO.h"
 #import "TaskTableViewDelegate.h"
 #import <Social/Social.h>
+#import "PageContentViewController.h"
 
-@interface MainViewController : UIViewController 
+
+@interface MainViewController : UIViewController <UIPageViewControllerDataSource>
+
 @property (strong, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *sidePanel;
 @property (nonatomic, weak) ContainerViewController *containerViewController;
+@property (strong, nonatomic) UIPageViewController *pageViewController;
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonTasks;
 @property (weak, nonatomic) IBOutlet UIButton *buttonCompletedTasks;
 @property (weak, nonatomic) IBOutlet UIButton *buttonOptions;
 @property (weak, nonatomic) IBOutlet UIButton *buttonAbout;
+@property (weak, nonatomic) IBOutlet UIView *topPanel;
+@property (weak, nonatomic) IBOutlet UIView *sideButton;
+@property (weak, nonatomic) IBOutlet UIView *twButton;
+@property (weak, nonatomic) IBOutlet UIView *fbButton;
+@property (weak, nonatomic) IBOutlet UIView *addButton;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
+@property (strong, nonatomic) NSArray *pageTitles;
 
 - (IBAction)showSidePanel:(id)sender;
 - (IBAction)addTask:(id)sender;

@@ -13,8 +13,12 @@
 
 // Realod tableView
 - (void)reloadTableView;
+
 // Indicates that the given item has been deleted
 -(void)taskDeleted:(NSDictionary *)taskItem;
+
+// Indicates that the given item has been completed
+-(void)taskCompleted:(NSDictionary *)taskItem;
 
 @end
 

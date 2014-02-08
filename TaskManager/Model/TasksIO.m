@@ -28,14 +28,14 @@ NSString *pathToTaskFile()
 
 @implementation TasksIO
 
--(NSArray *)loadTasksFromFile
++(NSArray *)loadTasksFromFile
 {
     NSArray *arrayWithTasks = [[NSArray alloc] initWithContentsOfFile:pathToTaskFile()];
     
     return arrayWithTasks;
 }
 
--(void)addTasksToFile:(NSDictionary *)tasksDictionary
++(void)addTasksToFile:(NSDictionary *)tasksDictionary
 {
     NSMutableArray *arrayFromFile = [[self loadTasksFromFile] mutableCopy];
     [arrayFromFile addObject:tasksDictionary];
@@ -43,7 +43,7 @@ NSString *pathToTaskFile()
     [arrayFromFile writeToFile:pathToTaskFile() atomically:YES];
 }
 
--(void)saveTaskArray:(NSMutableArray *)taskArray
++(void)saveTaskArray:(NSMutableArray *)taskArray
 {
     [taskArray writeToFile:pathToTaskFile() atomically:YES];
 }

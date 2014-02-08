@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2910695118A6D3F20054A8F6 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2910694F18A6D3F20054A8F6 /* PageContentViewController.m */; };
 		297D28CD189EA453006C847C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297D28CC189EA453006C847C /* Foundation.framework */; };
 		297D28CF189EA453006C847C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297D28CE189EA453006C847C /* CoreGraphics.framework */; };
 		297D28D1189EA453006C847C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 297D28D0189EA453006C847C /* UIKit.framework */; };
@@ -29,7 +30,7 @@
 		297D2923189EA4CB006C847C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 297D2918189EA4CB006C847C /* MainViewController.m */; };
 		297D2924189EA4CB006C847C /* OptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 297D291A189EA4CB006C847C /* OptionsViewController.m */; };
 		297D2925189EA4CB006C847C /* TasksViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 297D291C189EA4CB006C847C /* TasksViewController.m */; };
-		297D2927189EA6B2006C847C /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 297D2926189EA6B2006C847C /* Default@2x.png */; };
+		29C5D75018A6C58F00BECE69 /* CompletedTasksIO.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C5D74F18A6C58F00BECE69 /* CompletedTasksIO.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2910694F18A6D3F20054A8F6 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
+		2910695018A6D3F20054A8F6 /* PageContentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageContentViewController.h; sourceTree = "<group>"; };
 		297D28C9189EA453006C847C /* TaskManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		297D28CC189EA453006C847C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		297D28CE189EA453006C847C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -79,7 +82,8 @@
 		297D291A189EA4CB006C847C /* OptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OptionsViewController.m; sourceTree = "<group>"; };
 		297D291B189EA4CB006C847C /* TasksViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TasksViewController.h; sourceTree = "<group>"; };
 		297D291C189EA4CB006C847C /* TasksViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TasksViewController.m; sourceTree = "<group>"; };
-		297D2926189EA6B2006C847C /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		29C5D74E18A6C58F00BECE69 /* CompletedTasksIO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompletedTasksIO.h; sourceTree = "<group>"; };
+		29C5D74F18A6C58F00BECE69 /* CompletedTasksIO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompletedTasksIO.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,7 +113,6 @@
 		297D28C0189EA453006C847C = {
 			isa = PBXGroup;
 			children = (
-				297D2926189EA6B2006C847C /* Default@2x.png */,
 				297D28D2189EA453006C847C /* TaskManager */,
 				297D28F1189EA453006C847C /* TaskManagerTests */,
 				297D28CB189EA453006C847C /* Frameworks */,
@@ -198,6 +201,8 @@
 			children = (
 				297D290E189EA4CB006C847C /* TasksIO.h */,
 				297D290F189EA4CB006C847C /* TasksIO.m */,
+				29C5D74E18A6C58F00BECE69 /* CompletedTasksIO.h */,
+				29C5D74F18A6C58F00BECE69 /* CompletedTasksIO.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -205,6 +210,8 @@
 		297D2910189EA4CB006C847C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2910695018A6D3F20054A8F6 /* PageContentViewController.h */,
+				2910694F18A6D3F20054A8F6 /* PageContentViewController.m */,
 				297D2911189EA4CB006C847C /* AboutViewController.h */,
 				297D2912189EA4CB006C847C /* AboutViewController.m */,
 				297D2913189EA4CB006C847C /* CompletedTasksViewController.h */,
@@ -297,7 +304,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				297D2927189EA6B2006C847C /* Default@2x.png in Resources */,
 				297D28E5189EA453006C847C /* Images.xcassets in Resources */,
 				297D28D7189EA453006C847C /* InfoPlist.strings in Resources */,
 				297D28E0189EA453006C847C /* Main.storyboard in Resources */,
@@ -319,6 +325,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29C5D75018A6C58F00BECE69 /* CompletedTasksIO.m in Sources */,
 				297D2921189EA4CB006C847C /* CompletedTasksViewController.m in Sources */,
 				297D2925189EA4CB006C847C /* TasksViewController.m in Sources */,
 				297D2920189EA4CB006C847C /* AboutViewController.m in Sources */,
@@ -326,6 +333,7 @@
 				297D291D189EA4CB006C847C /* EmptySegue.m in Sources */,
 				297D2923189EA4CB006C847C /* MainViewController.m in Sources */,
 				297D28DD189EA453006C847C /* AppDelegate.m in Sources */,
+				2910695118A6D3F20054A8F6 /* PageContentViewController.m in Sources */,
 				297D28D9189EA453006C847C /* main.m in Sources */,
 				297D2924189EA4CB006C847C /* OptionsViewController.m in Sources */,
 				297D2922189EA4CB006C847C /* ContainerViewController.m in Sources */,

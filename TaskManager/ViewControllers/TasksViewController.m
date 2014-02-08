@@ -30,8 +30,9 @@
 }
 
 -(void)reloadTableView {
-    tasks = [[TasksIO alloc] init];
-    taskItems = [[tasks loadTasksFromFile] mutableCopy];
+
+    taskItems = [[TasksIO loadTasksFromFile] mutableCopy];
+    
     [self.tableView reloadData];
 }
 
@@ -56,8 +57,7 @@
 
     // Load tasks from file
     taskItems = [[NSMutableArray alloc] init];
-    tasks = [[TasksIO alloc] init];
-    taskItems = [[tasks loadTasksFromFile] mutableCopy];
+    taskItems = [[TasksIO loadTasksFromFile] mutableCopy];
     
     // Set cells class to TaskTablViewCell class
     [self.tableView registerClass:[TaskTableViewCell class] forCellReuseIdentifier:@"cell"];
@@ -70,6 +70,7 @@
     
     // Hide unused cells
     _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,27 +82,25 @@
 
 #pragma mark - TaskTableViewDelegate methods
 -(void)taskDeleted:(id)taskItem {
-    // use the UITableView to animate the removal of this row
-    /*NSUInteger index = [taskItems indexOfObject:taskItem];
-    [self.tableView beginUpdates];
-    [taskItems removeObject:taskItem];
-    [self.tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
-                          withRowAnimation:UITableViewRowAnimationFade];
-    [tasks saveTaskArray:taskItems];
-    [self.tableView endUpdates];*/
-    
+
     float delay = 0.0;
     
-    // remove the model object
+    // Remove the model object
     [taskItems removeObject:taskItem];
     
-    // find the visible cells
+    
+    
+    
+    
+    
+    
+    // Find the visible cells
     NSArray* visibleCells = [self.tableView visibleCells];
     
     UIView* lastView = [visibleCells lastObject];
     bool startAnimating = false;
     
-    // iterate over all of the cells
+    // Iterate over all of the cells
     for(TaskTableViewCell* cell in visibleCells) {
         if (startAnimating) {
             [UIView animateWithDuration:0.3
@@ -112,19 +111,83 @@
                              }
                              completion:^(BOOL finished){
                                  if (cell == lastView) {
-                                     [self.tableView reloadData];
+                                     //[self.tableView reloadData];
+                                     
+                                     /* Animate the table view reload */
+                                     [UIView transitionWithView: self.tableView duration:0.35f options: UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
+                                         [self.tableView reloadData];
+                                     } completion:^(BOOL isFinished){
+                                         /* TODO: Whatever you want here */
+                                     }];
+                                     
                                  }
                              }];
             delay+=0.03;
         }
         
-        // if you have reached the item that was deleted, start animating
+        // If you have reached the item that was deleted, start animating
         if (cell.taskItem == taskItem) {
             startAnimating = true;
             cell.hidden = YES;
         }
     }
-    [tasks saveTaskArray:taskItems];
+    
+    [TasksIO saveTaskArray:taskItems];
+    
+    //NSLog(@"Tasks arrays after completing:\n allTasks = %@;\ncompletedTasks = %@", [TasksIO loadTasksFromFile], [CompletedTasksIO loadCompletedTasksFromFile]);
+
+}
+
+-(void)taskCompleted:(id)taskItem {
+    
+    float delay = 0.0;
+    
+    // Add completed task to file
+    [CompletedTasksIO addCompletedTasksToFile:taskItem];
+    
+    // Remove the model object
+    [taskItems removeObject:taskItem];
+    
+    // Find the visible cells
+    NSArray* visibleCells = [self.tableView visibleCells];
+    
+    UIView* lastView = [visibleCells lastObject];
+    bool startAnimating = false;
+    
+    // Iterate over all of the cells
+    for(TaskTableViewCell* cell in visibleCells) {
+        if (startAnimating) {
+            [UIView animateWithDuration:0.3
+                                  delay:delay
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 cell.frame = CGRectOffset(cell.frame, 0.0f, -cell.frame.size.height);
+                             }
+                             completion:^(BOOL finished){
+                                 if (cell == lastView) {
+                                     //[self.tableView reloadData];
+                                     
+                                     /* Animate the table view reload */
+                                     [UIView transitionWithView: self.tableView duration:0.35f options: UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
+                                         [self.tableView reloadData];
+                                     } completion:^(BOOL isFinished){
+                                         /* TODO: Whatever you want here */
+                                     }];
+                                 }
+                             }];
+            delay+=0.03;
+        }
+        
+        // If you have reached the item that was deleted, start animating
+        if (cell.taskItem == taskItem) {
+            startAnimating = true;
+            cell.hidden = YES;
+        }
+    }
+    
+    [TasksIO saveTaskArray:taskItems];
+    
+    //NSLog(@"Tasks arrays after completing:\n allTasks = %@;\ncompletedTasks = %@", [TasksIO loadTasksFromFile], [CompletedTasksIO loadCompletedTasksFromFile]);
 }
 
 #pragma mark - UITableViewDataDelegate protocol methods
