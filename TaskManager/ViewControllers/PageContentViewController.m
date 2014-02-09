@@ -7,6 +7,7 @@
 //
 
 #import "PageContentViewController.h"
+#import <Parse/Parse.h>
 
 @interface PageContentViewController ()
 
@@ -34,6 +35,7 @@
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"firstLaunch"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.goToAppButton setEnabled:YES];
+            
         }];
     }
     
@@ -48,7 +50,4 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)goToApp:(id)sender {
-    
-}
 @end

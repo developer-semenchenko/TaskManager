@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MainViewController.h"
 
 @interface PageContentViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *introductionTextLabel;
@@ -15,5 +16,4 @@
 @property NSUInteger pageIndex;
 @property NSString *labelText;
 
-- (IBAction)goToApp:(id)sender;
 @end

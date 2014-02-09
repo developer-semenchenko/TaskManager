@@ -20,6 +20,23 @@
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     pageControl.backgroundColor = [UIColor colorWithRed:0.243f green:0.314f blue:0.412f alpha:1.0f];
     
+    
+    // Loading Parse
+    [Parse setApplicationId:@"INOZTZ475VfPwGgWqsuNDWcKpq7kPATgflarYDUp"
+                  clientKey:@"nbzuWeEAMPyILBKtYhopW6RhwKDgCQzeW4AaIqL7"];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    if (![PFUser currentUser]) { // No user logged in
+        
+        // Here we load login EmptyViewController
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *emptyViewController = [storyboard instantiateViewControllerWithIdentifier:@"EmptyViewController"];
+        emptyViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        self.window.rootViewController = emptyViewController;
+        [self.window makeKeyAndVisible];
+    }
+
     return YES;
 }
 							

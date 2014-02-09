@@ -30,6 +30,14 @@ BOOL isShowingSideView = NO;
     {
         // app already launched
         
+        // Showing UI
+        _topPanel.alpha = 1;
+        _sideButton.alpha = 1;
+        _twButton.alpha = 1;
+        _fbButton.alpha = 1;
+        _addButton.alpha = 1;
+        _containerView.alpha = 1;
+        
     }
     else
     {
@@ -285,5 +293,13 @@ BOOL isShowingSideView = NO;
                                   otherButtonTitles:nil];
         [alertView show];
     }
+}
+
+
+-(void)reloadSelf
+{
+    NSLog(@"something");
+    
+    [self.pageViewController dismissViewControllerAnimated:YES completion:Nil];
 }
 @end

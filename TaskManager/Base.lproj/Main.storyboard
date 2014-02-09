@@ -12,6 +12,27 @@
             </objects>
             <point key="canvasLocation" x="-636" y="176"/>
         </scene>
+        <!--Empty View Controller-->
+        <scene sceneID="AMb-q3-040">
+            <objects>
+                <viewController storyboardIdentifier="EmptyViewController" id="VdS-We-W2Q" customClass="EmptyViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="VaF-2l-qrB"/>
+                        <viewControllerLayoutGuide type="bottom" id="DW9-2r-VcQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OyH-bz-blB">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.2666666667" green="0.36078431370000003" blue="0.47058823529999999" alpha="0.94999999999999996" colorSpace="deviceRGB"/>
+                    </view>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="presentMainViewController" modalTransitionStyle="crossDissolve" id="16u-pw-Gol"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vU9-Rd-60X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-261" y="-446"/>
+        </scene>
         <!--Page Content View Controller-->
         <scene sceneID="zNO-QB-mwA">
             <objects>
@@ -34,12 +55,11 @@
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fc-U8-UEn">
                                 <rect key="frame" x="229" y="392" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go to App">
+                                <state key="normal" title="Lets start!">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="goToApp:" destination="8fI-m1-w2J" eventType="touchUpInside" id="Mr9-Yf-Nzf"/>
-                                    <segue destination="vXZ-lx-hvc" kind="modal" modalTransitionStyle="crossDissolve" id="586-MU-gxb"/>
+                                    <segue destination="vXZ-lx-hvc" kind="modal" modalTransitionStyle="crossDissolve" id="HtC-X1-js4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -57,7 +77,7 @@
         <!--Main View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" userLabel="Main View Controller" customClass="MainViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="vXZ-lx-hvc" userLabel="Main View Controller" customClass="MainViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="nnj-Pg-C5o"/>
                         <viewControllerLayoutGuide type="bottom" id="VYN-ME-mSr"/>
@@ -196,7 +216,7 @@
         <!--Tasks View Controller-->
         <scene sceneID="s0U-R9-cik">
             <objects>
-                <viewController id="EYu-YT-vcS" userLabel="Tasks View Controller" customClass="TasksViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TasksViewController" id="EYu-YT-vcS" userLabel="Tasks View Controller" customClass="TasksViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="B1a-Hk-rru"/>
                         <viewControllerLayoutGuide type="bottom" id="LoS-QG-kJx"/>
@@ -433,4 +453,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="16u-pw-Gol"/>
+    </inferredMetricsTieBreakers>
 </document>
