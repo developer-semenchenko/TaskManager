@@ -41,6 +41,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    
     // Instead of creating new VCs on each seque we want to hang on to existing
     // instances if we have it. Remove the second condition of the following
     // two if statements to get new VC instances instead.
@@ -62,11 +63,13 @@
     
     // If we're going to the first view controller.
     if ([segue.identifier isEqualToString:SegueIdentifierFirst]) {
+        
         // If this is not the first time we're loading this.
         if (self.childViewControllers.count > 0) {
             [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:self.tasksViewController];
         }
         else {
+            
             // If this is the very first time we're loading this we need to do
             // an initial load and not a swap.
             [self addChildViewController:segue.destinationViewController];
@@ -77,8 +80,9 @@
             [segue.destinationViewController didMoveToParentViewController:self];
         }
     }
+    
     // By definition the second view controller will always be swapped with the
-    // first one.
+    // first one. Loading second, third and fourth VC
     else if ([segue.identifier isEqualToString:SegueIdentifierSecond]) {
         [self swapFromViewController:[self.childViewControllers objectAtIndex:0] toViewController:self.completedTasksViewController];
     }
@@ -104,6 +108,7 @@
     }];
 }
 
+#pragma mark - Showing ContainerView ViewControllers
 - (void)swapToTasks
 {
     if (self.transitionInProgress) {
@@ -147,4 +152,5 @@
     self.currentSegueIdentifier = SegueIdentifierFourth;
     [self performSegueWithIdentifier:self.currentSegueIdentifier sender:nil];
 }
+
 @end

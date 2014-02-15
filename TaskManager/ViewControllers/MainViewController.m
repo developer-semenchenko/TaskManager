@@ -5,6 +5,7 @@
 //  Created by Vladyslav Semenchenko on 2/2/14.
 //  Copyright (c) 2014 Vladyslav Semenchenko. All rights reserved.
 //
+
 BOOL isShowingSideView = NO;
 
 #import "MainViewController.h"
@@ -15,12 +16,27 @@ BOOL isShowingSideView = NO;
 
 @implementation MainViewController
 
+#pragma mark - Helpers
+-(void) showMessage:(NSString *) message
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"V.S. Debug"
+                                                        message:message
+                                                       delegate:self
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:Nil, nil];
+    
+    alertView.alertViewStyle = UIAlertViewStyleDefault;
+    
+    [alertView show];
+}
+
 #pragma  mark - Defaul View life cycle methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    _pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
+    // InrtoViewController texts
+    self.pageTitles = @[@"Over 200 Tips and Tricks", @"Discover Hidden Features", @"Bookmark Favorite Tip", @"Free Regular Update"];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
@@ -28,29 +44,25 @@ BOOL isShowingSideView = NO;
     // Checking first time launch
     if ([userDefaults boolForKey:@"firstLaunch"])
     {
-        // app already launched
-        
-        // Showing UI
-        _topPanel.alpha = 1;
-        _sideButton.alpha = 1;
-        _twButton.alpha = 1;
-        _fbButton.alpha = 1;
-        _addButton.alpha = 1;
-        _containerView.alpha = 1;
+        // App already launched - showing UI
+        self.topPanel.alpha = 1;
+        self.sideButton.alpha = 1;
+        self.twButton.alpha = 1;
+        self.fbButton.alpha = 1;
+        self.addButton.alpha = 1;
+        self.containerView.alpha = 1;
         
     }
     else
     {
         
         // Hiding UI
-        _topPanel.alpha = 0;
-        _sideButton.alpha = 0;
-        _twButton.alpha = 0;
-        _fbButton.alpha = 0;
-        _addButton.alpha = 0;
-        _containerView.alpha = 0;
-        
-        // Do any additional setup after loading the view, typically from a nib.
+        self.topPanel.alpha = 0;
+        self.sideButton.alpha = 0;
+        self.twButton.alpha = 0;
+        self.fbButton.alpha = 0;
+        self.addButton.alpha = 0;
+        self.containerView.alpha = 0;
         
         // Create page view controller
         self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
@@ -63,8 +75,9 @@ BOOL isShowingSideView = NO;
         // Change the size of page view controller
         self.pageViewController.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
         
-        [self addChildViewController:_pageViewController];
-        [self.view addSubview:_pageViewController.view];
+        // Show IntroViewcontroller
+        [self addChildViewController:self.pageViewController];
+        [self.view addSubview:self.pageViewController.view];
         [self.pageViewController didMoveToParentViewController:self];
         
     }
@@ -141,23 +154,18 @@ BOOL isShowingSideView = NO;
 
 #pragma mark - TopPanel methods
 - (IBAction)showSidePanel:(id)sender {
-    CGRect newMainViewFrame = _mainView.frame;
+    CGRect newMainViewFrame = self.mainView.frame;
     newMainViewFrame.origin.x += 70;
     
-    CATransform3D rotationAndPerspectiveTransform = CATransform3DIdentity;
-    rotationAndPerspectiveTransform.m34 = -1.0 / 500.0;
-    rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, 45, 0, 1, 0);
-    
     // Sliding mainView to show SidePanel
-    
     if (!isShowingSideView){
     [UIView animateWithDuration:0.5 animations:^{
-        _mainView.frame = newMainViewFrame;
-        _sidePanel.alpha = 1.0f;
-        _buttonTasks.alpha = 1.0f;
-        _buttonCompletedTasks.alpha = 1.0f;
-        _buttonOptions.alpha = 1.0f;
-        _buttonAbout.alpha = 1.0f;
+        self.mainView.frame = newMainViewFrame;
+        self.sidePanel.alpha = 1.0f;
+        self.buttonTasks.alpha = 1.0f;
+        self.buttonCompletedTasks.alpha = 1.0f;
+        self.buttonOptions.alpha = 1.0f;
+        self.buttonAbout.alpha = 1.0f;
         
     }];
         isShowingSideView = YES;
@@ -165,12 +173,12 @@ BOOL isShowingSideView = NO;
     }
     else{
         [UIView animateWithDuration:0.5 animations:^{
-            _mainView.frame = self.view.frame;
-            _sidePanel.alpha = 0.0f;
-            _buttonTasks.alpha = 0.0f;
-            _buttonCompletedTasks.alpha = 0.0f;
-            _buttonOptions.alpha = 0.0f;
-            _buttonAbout.alpha = 0.0f;
+            self.mainView.frame = self.view.frame;
+            self.sidePanel.alpha = 0.0f;
+            self.buttonTasks.alpha = 0.0f;
+            self.buttonCompletedTasks.alpha = 0.0f;
+            self.buttonOptions.alpha = 0.0f;
+            self.buttonAbout.alpha = 0.0f;
         }];
         isShowingSideView = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockTableView" object:nil];
@@ -193,12 +201,12 @@ BOOL isShowingSideView = NO;
 - (IBAction)openTasks:(id)sender {
     [self.containerViewController swapToTasks];
     [UIView animateWithDuration:0.3 animations:^{
-        _mainView.frame = self.view.frame;
-        _sidePanel.alpha = 0.0f;
-        _buttonTasks.alpha = 0.0f;
-        _buttonCompletedTasks.alpha = 0.0f;
-        _buttonOptions.alpha = 0.0f;
-        _buttonAbout.alpha = 0.0f;
+        self.mainView.frame = self.view.frame;
+        self.sidePanel.alpha = 0.0f;
+        self.buttonTasks.alpha = 0.0f;
+        self.buttonCompletedTasks.alpha = 0.0f;
+        self.buttonOptions.alpha = 0.0f;
+        self.buttonAbout.alpha = 0.0f;
     }];
     isShowingSideView = NO;
 }
@@ -206,12 +214,12 @@ BOOL isShowingSideView = NO;
 - (IBAction)openCompletedTasks:(id)sender {
     [self.containerViewController swapToCompletedTasks];
     [UIView animateWithDuration:0.3 animations:^{
-        _mainView.frame = self.view.frame;
-        _sidePanel.alpha = 0.0f;
-        _buttonTasks.alpha = 0.0f;
-        _buttonCompletedTasks.alpha = 0.0f;
-        _buttonOptions.alpha = 0.0f;
-        _buttonAbout.alpha = 0.0f;
+        self.mainView.frame = self.view.frame;
+        self.sidePanel.alpha = 0.0f;
+        self.buttonTasks.alpha = 0.0f;
+        self.buttonCompletedTasks.alpha = 0.0f;
+        self.buttonOptions.alpha = 0.0f;
+        self.buttonAbout.alpha = 0.0f;
     }];
     isShowingSideView = NO;
 }
@@ -219,12 +227,12 @@ BOOL isShowingSideView = NO;
 - (IBAction)openOptions:(id)sender {
     [self.containerViewController swapToOptions];
     [UIView animateWithDuration:0.3 animations:^{
-        _mainView.frame = self.view.frame;
-        _sidePanel.alpha = 0.0f;
-        _buttonTasks.alpha = 0.0f;
-        _buttonCompletedTasks.alpha = 0.0f;
-        _buttonOptions.alpha = 0.0f;
-        _buttonAbout.alpha = 0.0f;
+        self.mainView.frame = self.view.frame;
+        self.sidePanel.alpha = 0.0f;
+        self.buttonTasks.alpha = 0.0f;
+        self.buttonCompletedTasks.alpha = 0.0f;
+        self.buttonOptions.alpha = 0.0f;
+        self.buttonAbout.alpha = 0.0f;
     }];
     isShowingSideView = NO;
 }
@@ -232,12 +240,12 @@ BOOL isShowingSideView = NO;
 - (IBAction)openAbout:(id)sender {
     [self.containerViewController swapToAbout];
     [UIView animateWithDuration:0.3 animations:^{
-        _mainView.frame = self.view.frame;
-        _sidePanel.alpha = 0.0f;
-        _buttonTasks.alpha = 0.0f;
-        _buttonCompletedTasks.alpha = 0.0f;
-        _buttonOptions.alpha = 0.0f;
-        _buttonAbout.alpha = 0.0f;
+        self.mainView.frame = self.view.frame;
+        self.sidePanel.alpha = 0.0f;
+        self.buttonTasks.alpha = 0.0f;
+        self.buttonCompletedTasks.alpha = 0.0f;
+        self.buttonOptions.alpha = 0.0f;
+        self.buttonAbout.alpha = 0.0f;
     }];
     isShowingSideView = NO;
 }
@@ -287,7 +295,7 @@ BOOL isShowingSideView = NO;
     {
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Sorry"
-                                  message:@"You can't send a tweet right now, make sure your device has an internet connection and you have at least one Facebook account setup"
+                                  message:@"You can't send any news right now, make sure your device has an internet connection and you have at least one Facebook account setup"
                                   delegate:self
                                   cancelButtonTitle:@"OK"
                                   otherButtonTitles:nil];
@@ -296,10 +304,65 @@ BOOL isShowingSideView = NO;
 }
 
 
--(void)reloadSelf
+#pragma mark - CLLocationManagerDelegate
+
+/*- (void)locationManager:(CLLocationManager *)manager
+      didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    NSLog(@"something");
-    
-    [self.pageViewController dismissViewControllerAnimated:YES completion:Nil];
+    if(state == CLRegionStateInside)
+    {
+        [self showMessage:@"CLRegionStateInside"];
+        NSLog(@"##Entered Region - %@", region.identifier);
+    }
+    else if(state == CLRegionStateOutside)
+    {
+        [self showMessage:@"CLRegionStateOutside"];
+        
+        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+        localNotification.fireDate = [NSDate date];
+        localNotification.alertBody = @"CLRegionStateOutside";
+        localNotification.alertAction = @"Show me app";
+        localNotification.timeZone = [NSTimeZone defaultTimeZone];
+        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+        
+        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+        
+        
+        NSLog(@"##Exited Region - %@", region.identifier);
+    }
+    else{
+        [self showMessage:@"else state"];
+        NSLog(@"##Unknown state  Region - %@", region.identifier);
+    }
 }
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    NSString *string = [[NSString alloc] initWithFormat:@"didStartMonitoringForRegion: %@", region];
+    [self showMessage:string];
+    
+    NSLog(@"Started monitoring %@ region", region.identifier);
+}
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    [self showMessage:@"didEnterRegion:"];
+    NSLog(@"Entered Region - %@", region.identifier);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    [self showMessage:@"didExitRegion:"];
+    
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate date];
+    localNotification.alertBody = @"CLRegionStateOutside";
+    localNotification.alertAction = @"Show me app";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    
+    NSLog(@"Exited Region - %@", region.identifier);
+}*/
+
 @end

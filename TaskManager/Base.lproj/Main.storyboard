@@ -33,6 +33,82 @@
             </objects>
             <point key="canvasLocation" x="-261" y="-446"/>
         </scene>
+        <!--Add Task View Controller-->
+        <scene sceneID="94G-cx-Pa8">
+            <objects>
+                <viewController storyboardIdentifier="AddTaskViewController" id="oqJ-GC-Tgg" customClass="AddTaskViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lpa-aU-U9k"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Nx-NX-15Y"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="dap-EC-Bnb">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MQT-RA-ILu" userLabel="topPanel">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9V-nB-Geb">
+                                        <rect key="frame" x="13" y="25" width="56" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="&lt; Back"/>
+                                        <connections>
+                                            <action selector="showSidePanel:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tAt-D1-bCC"/>
+                                            <segue destination="vXZ-lx-hvc" kind="modal" modalTransitionStyle="crossDissolve" id="6JN-bb-gVd"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuf-SJ-tqI">
+                                        <rect key="frame" x="254" y="25" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Create"/>
+                                        <connections>
+                                            <segue destination="vXZ-lx-hvc" kind="modal" identifier="createTask" modalTransitionStyle="crossDissolve" id="OZp-AK-4Q8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.2666666667" green="0.36078431370000003" blue="0.47058823529999999" alpha="1" colorSpace="deviceRGB"/>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Write here your tasks.." clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="71E-g6-cJ9">
+                                <rect key="frame" x="20" y="78" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes" keyboardAppearance="alert" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <mapView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7F9-qA-B9j">
+                                <rect key="frame" x="20" y="116" width="280" height="176"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="50r-Ah-BBf">
+                                <rect key="frame" x="20" y="300" width="223" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="5m"/>
+                                    <segment title="50m"/>
+                                    <segment title="100m"/>
+                                </segments>
+                            </segmentedControl>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FQu-QX-e4P">
+                                <rect key="frame" x="251" y="298" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="onTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="thumbTintColor" red="0.2666666667" green="0.36078431370000003" blue="0.47058823529999999" alpha="0.94999999999999996" colorSpace="deviceRGB"/>
+                            </switch>
+                        </subviews>
+                        <color key="backgroundColor" red="0.2666666667" green="0.36078431370000003" blue="0.47058823529999999" alpha="0.94999999999999996" colorSpace="deviceRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="createButton" destination="cuf-SJ-tqI" id="WlT-VP-PSm"/>
+                        <outlet property="enableLocationMonitoring" destination="FQu-QX-e4P" id="AuN-4l-LGf"/>
+                        <outlet property="mapView" destination="7F9-qA-B9j" id="mE7-1A-nEw"/>
+                        <outlet property="textField" destination="71E-g6-cJ9" id="A7x-dA-S5K"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eZK-Jg-lmn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="369" y="-532"/>
+        </scene>
         <!--Page Content View Controller-->
         <scene sceneID="zNO-QB-mwA">
             <objects>
@@ -162,7 +238,7 @@
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Add"/>
                                                 <connections>
-                                                    <action selector="addTask:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="AyP-7x-ra0"/>
+                                                    <segue destination="oqJ-GC-Tgg" kind="modal" modalTransitionStyle="crossDissolve" id="Zx1-yv-5qb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNe-Tj-xhC">
@@ -387,7 +463,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="uaX-PP-sDO" id="utO-jF-nlq"/>
-                        <outlet property="textLable" destination="nzp-lt-FFk" id="zdn-dI-mAc"/>
+                        <outlet property="textLabel" destination="nzp-lt-FFk" id="HVP-SN-Qp1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzP-uX-QqD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -454,6 +530,6 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="16u-pw-Gol"/>
+        <segue reference="OZp-AK-4Q8"/>
     </inferredMetricsTieBreakers>
 </document>

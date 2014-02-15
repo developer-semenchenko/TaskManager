@@ -34,5 +34,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key> UIBackgroundModes</key>
+	<string>location</string>
 </dict>
 </plist>

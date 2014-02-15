@@ -10,6 +10,7 @@
 #import "TasksIO.h"
 #import "CompletedTasksIO.h"
 #import "TaskTableViewCell.h"
+#import "AddTaskViewController.h"
 
 @interface TasksViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, TaskTableViewDelegate>
 {
@@ -17,10 +18,5 @@
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-
--(void)disableTableViewInteraction;
--(void)enableTableViewInteraction;
-
-- (void)reloadTableView;
 
 @end

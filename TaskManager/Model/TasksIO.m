@@ -38,7 +38,7 @@ NSString *pathToTaskFile()
 +(void)addTasksToFile:(NSDictionary *)tasksDictionary
 {
     NSMutableArray *arrayFromFile = [[self loadTasksFromFile] mutableCopy];
-    [arrayFromFile addObject:tasksDictionary];
+    [arrayFromFile insertObject:tasksDictionary atIndex:0];
     
     [arrayFromFile writeToFile:pathToTaskFile() atomically:YES];
 }

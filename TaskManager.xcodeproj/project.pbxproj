@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2905C0FC18AF89AA005E711D /* myLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905C0F918AF89AA005E711D /* myLogInViewController.m */; };
+		2905C0FD18AF89AA005E711D /* mySignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905C0FB18AF89AA005E711D /* mySignUpViewController.m */; };
+		2905C10018AF8AF6005E711D /* AddTaskViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2905C0FF18AF8AF6005E711D /* AddTaskViewController.m */; };
 		29085BB018A7CF05001D3BF6 /* EmptyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 29085BAF18A7CF05001D3BF6 /* EmptyViewController.m */; };
 		2910695118A6D3F20054A8F6 /* PageContentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2910694F18A6D3F20054A8F6 /* PageContentViewController.m */; };
 		2971A85318A6E12A0082AA7C /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2971A85218A6E12A0082AA7C /* Parse.framework */; };
@@ -55,6 +58,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2905C0F818AF89AA005E711D /* myLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = myLogInViewController.h; sourceTree = "<group>"; };
+		2905C0F918AF89AA005E711D /* myLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = myLogInViewController.m; sourceTree = "<group>"; };
+		2905C0FA18AF89AA005E711D /* mySignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mySignUpViewController.h; sourceTree = "<group>"; };
+		2905C0FB18AF89AA005E711D /* mySignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mySignUpViewController.m; sourceTree = "<group>"; };
+		2905C0FE18AF8AF6005E711D /* AddTaskViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddTaskViewController.h; sourceTree = "<group>"; };
+		2905C0FF18AF8AF6005E711D /* AddTaskViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddTaskViewController.m; sourceTree = "<group>"; };
 		29085BAE18A7CF05001D3BF6 /* EmptyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmptyViewController.h; sourceTree = "<group>"; };
 		29085BAF18A7CF05001D3BF6 /* EmptyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmptyViewController.m; sourceTree = "<group>"; };
 		2910694F18A6D3F20054A8F6 /* PageContentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageContentViewController.m; sourceTree = "<group>"; };
@@ -261,6 +270,12 @@
 		297D2910189EA4CB006C847C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2905C0FE18AF8AF6005E711D /* AddTaskViewController.h */,
+				2905C0FF18AF8AF6005E711D /* AddTaskViewController.m */,
+				2905C0F818AF89AA005E711D /* myLogInViewController.h */,
+				2905C0F918AF89AA005E711D /* myLogInViewController.m */,
+				2905C0FA18AF89AA005E711D /* mySignUpViewController.h */,
+				2905C0FB18AF89AA005E711D /* mySignUpViewController.m */,
 				29085BAE18A7CF05001D3BF6 /* EmptyViewController.h */,
 				29085BAF18A7CF05001D3BF6 /* EmptyViewController.m */,
 				2910695018A6D3F20054A8F6 /* PageContentViewController.h */,
@@ -389,8 +404,11 @@
 				297D28DD189EA453006C847C /* AppDelegate.m in Sources */,
 				2910695118A6D3F20054A8F6 /* PageContentViewController.m in Sources */,
 				297D28D9189EA453006C847C /* main.m in Sources */,
+				2905C10018AF8AF6005E711D /* AddTaskViewController.m in Sources */,
+				2905C0FC18AF89AA005E711D /* myLogInViewController.m in Sources */,
 				297D2924189EA4CB006C847C /* OptionsViewController.m in Sources */,
 				297D2922189EA4CB006C847C /* ContainerViewController.m in Sources */,
+				2905C0FD18AF89AA005E711D /* mySignUpViewController.m in Sources */,
 				297D291F189EA4CB006C847C /* TasksIO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

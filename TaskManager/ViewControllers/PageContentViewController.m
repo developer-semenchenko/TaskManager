@@ -15,15 +15,6 @@
 
 @implementation PageContentViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,9 +30,7 @@
         }];
     }
     
-    self.introductionTextLabel.text = self.labelText;
-    
-	// Do any additional setup after loading the view.
+    self.introductionTextLabel.text = self.labelText;    
 }
 
 - (void)didReceiveMemoryWarning

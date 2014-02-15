@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "myLogInViewController.h"
+#import "mySignUpViewController.h"
 
 @interface EmptyViewController : UIViewController <PFLogInViewControllerDelegate, PFSignUpViewControllerDelegate>
 
--(void)goToApp;
+-(void)goToIntroViewController;
 
 @end

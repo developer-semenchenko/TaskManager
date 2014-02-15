@@ -14,6 +14,7 @@
 
 @implementation EmptyViewController
 
+#pragma  mark - Defaul View life cycle methods
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -26,15 +27,17 @@
 {
     [super viewDidAppear:animated];
 
-    if (![PFUser currentUser]) { // No user logged in
+    // No user logged in
+    if (![PFUser currentUser])
+    {
         
         // Create the log in view controller
-        PFLogInViewController *logInViewController = [[PFLogInViewController alloc] init];
-        [logInViewController setDelegate:self]; // Set ourselves as the delegate
+        myLogInViewController *logInViewController = [[myLogInViewController alloc] init];
+        [logInViewController setDelegate:self];
         
         // Create the sign up view controller
-        PFSignUpViewController *signUpViewController = [[PFSignUpViewController alloc] init];
-        [signUpViewController setDelegate:self]; // Set ourselves as the delegate
+        mySignUpViewController *signUpViewController = [[mySignUpViewController alloc] init];
+        [signUpViewController setDelegate:self]; 
         
         // Assign our sign up controller to be displayed from the login controller
         [logInViewController setSignUpController:signUpViewController];
@@ -49,16 +52,16 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)goToApp
+#pragma mark - Go to App Intro
+-(void)goToIntroViewController
 {
-    NSLog(@"goToApp");
-    //[self.storyboard instantiateViewControllerWithIdentifier:@"MainViewController"];
-    
     [self performSegueWithIdentifier:@"presentMainViewController" sender:self];
 }
-#pragma mark - Parse delegate methods
+
+#pragma mark - Parse delegate Log In methods
 // Sent to the delegate to determine whether the log in request should be submitted to the server.
 - (BOOL)logInViewController:(PFLogInViewController *)logInController shouldBeginLogInWithUsername:(NSString *)username password:(NSString *)password {
+    
     // Check if both fields are completed
     if (username && password && username.length != 0 && password.length != 0) {
         return YES; // Begin login process
@@ -75,13 +78,17 @@
 // Sent to the delegate when a PFUser is logged in.
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
     [self dismissViewControllerAnimated:YES completion:^(){
-        [self performSelector:@selector(goToApp)];
+        [self performSelector:@selector(goToIntroViewController)];
     }];
 }
 
 // Sent to the delegate when the log in attempt fails.
 - (void)logInViewController:(PFLogInViewController *)logInController didFailToLogInWithError:(NSError *)error {
-    NSLog(@"Failed to log in...");
+    [[[UIAlertView alloc] initWithTitle:@"Failed Log in"
+                                message:@"Please, check your internet connection and try again!"
+                               delegate:nil
+                      cancelButtonTitle:@"ok"
+                      otherButtonTitles:nil] show];
 }
 
 // Sent to the delegate when the log in screen is dismissed.
@@ -89,6 +96,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - Parse delegate Sign Up methods
 // Sent to the delegate to determine whether the sign up request should be submitted to the server.
 - (BOOL)signUpViewController:(PFSignUpViewController *)signUpController shouldBeginSignUp:(NSDictionary *)info {
     BOOL informationComplete = YES;
@@ -116,13 +124,17 @@
 
 // Sent to the delegate when a PFUser is signed up.
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
-    [self dismissViewControllerAnimated:YES completion:NULL]; // Dismiss the PFSignUpViewController
-    
-}
+    [self dismissViewControllerAnimated:YES completion:^(){
+        [self performSelector:@selector(goToIntroViewController)];
+    }];}
 
 // Sent to the delegate when the sign up attempt fails.
 - (void)signUpViewController:(PFSignUpViewController *)signUpController didFailToSignUpWithError:(NSError *)error {
-    NSLog(@"Failed to sign up...");
+    [[[UIAlertView alloc] initWithTitle:@"Failed Log in"
+                                message:@"Please, check your internet connection and try again!"
+                               delegate:nil
+                      cancelButtonTitle:@"ok"
+                      otherButtonTitles:nil] show];
 }
 
 // Sent to the delegate when the sign up screen is dismissed.
