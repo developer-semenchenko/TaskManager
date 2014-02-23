@@ -73,21 +73,27 @@
 #pragma mark - TaskTableViewDelegate methods
 -(void)taskDeleted:(id)taskItem {
 
-    float delay = 0.0;
-    
+    //float delay = 0.0;
     // Remove the task from  task array
-    [taskItems removeObject:taskItem];
+    //[taskItems removeObject:taskItem];
+    
+    // Removing one object from array
+    int n=[taskItems indexOfObject:taskItem];
+    
+    if(n<[taskItems count]){
+        [taskItems removeObjectAtIndex:n];
+    }
     
     // Find the visible cells
     NSArray* visibleCells = [self.tableView visibleCells];
     
-    UIView* lastView = [visibleCells lastObject];
-    bool startAnimating = false;
+    //UIView* lastView = [visibleCells lastObject];
+    //bool startAnimating = true;
     
     // Iterate over all of the cells
     for(TaskTableViewCell* cell in visibleCells) {
-        if (startAnimating) {
-            [UIView animateWithDuration:0.3
+        //if (startAnimating) {
+            /*[UIView animateWithDuration:0.3
                                   delay:delay
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^{
@@ -99,22 +105,32 @@
                                      
                                      // Animate the table view reload
                                      [UIView transitionWithView: self.tableView duration:0.35f options: UIViewAnimationOptionTransitionCrossDissolve animations:^(void){
-                                         [self.tableView reloadData];
-                                     } completion:^(BOOL isFinished){
-                                         // TODO: Whatever you want here
-                                     }];
+                                         [self.tableView reloadData];*/
                                      
-                                 }
-                             }];
-            delay+=0.03;
-        }
+                                     
+                                     //} completion:^(BOOL isFinished){
+                                         // TODO: Whatever you want here
+                                    //}];
+                                     
+                                // }
+                             //}];
+            //delay+=0.03;
+        //}
         
         // If you have reached the item that was deleted, start animating
         if (cell.taskItem == taskItem) {
-            startAnimating = true;
-            cell.hidden = YES;
+            //startAnimating = false;
+            //cell.hidden = YES;
+
+            NSIndexPath *cellIndexPath = [self.tableView indexPathForCell:cell];
             
-            // Delete location manager monitored region if deleted tasks text = region text
+            //[_testArray[cellIndexPath.section] removeObjectAtIndex:cellIndexPath.row];
+            
+            [self.tableView deleteRowsAtIndexPaths:@[cellIndexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            
+            [self animateCells];
+            
+                        // Delete location manager monitored region if deleted tasks text = region text
             AddTaskViewController *sharedLocManager = [AddTaskViewController sharedLocationController];
             
             for (CLRegion *monitored in [sharedLocManager.locationManager monitoredRegions]){
@@ -130,6 +146,36 @@
     
 }
 
+-(void)animateCells{
+    
+    /*NSArray* newVisibleCells = [self.tableView visibleCells];
+    float delay = 0.0;
+    int i = 0;
+
+    
+    
+        for(TaskTableViewCell* cell in newVisibleCells) {
+            
+                [UIView animateWithDuration:0.3
+                                      delay:delay
+                                    options:UIViewAnimationOptionCurveEaseInOut
+                                 animations:^{
+                                     if (i > 0){
+                                         
+                                         cell.frame = CGRectOffset(cell.frame, 0.0f, -cell.frame.size.height);
+                                     }
+                                 }
+                                 completion:^(BOOL finished){
+                                 }];
+                
+                delay+=0.03;
+            i++;
+            
+        
+    }*/
+
+
+}
 -(void)taskCompleted:(id)taskItem {
     
     float delay = 0.0;
@@ -148,6 +194,7 @@
     
     // Iterate over all of the cells
     for(TaskTableViewCell* cell in visibleCells) {
+        //NSLog(@"Cell id's = %@", cell.cellID);
         if (startAnimating) {
             [UIView animateWithDuration:0.3
                                   delay:delay
@@ -206,12 +253,15 @@
     int index = [indexPath row];
     NSDictionary *taskDictionary = [taskItems objectAtIndex:index];
     NSString *taskText = [taskDictionary objectForKey:@"Task text"];
-    
+    NSNumber *taskId = [taskDictionary objectForKey:@"Id"];
+
     // Set the text and other customization
     cell.textLabel.text = taskText;
+    cell.cellID = taskId;
     cell.textLabel.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
     
+    NSLog(@"Cell id %@", cell.cellID);
     // Set delegate to self
     cell.delegate = self;
     cell.taskItem = taskDictionary;

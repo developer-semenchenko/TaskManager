@@ -50,18 +50,18 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9V-nB-Geb">
-                                        <rect key="frame" x="13" y="25" width="56" height="30"/>
+                                        <rect key="frame" x="20" y="25" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="&lt; Back"/>
+                                        <state key="normal" backgroundImage="back.png"/>
                                         <connections>
                                             <action selector="showSidePanel:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="tAt-D1-bCC"/>
                                             <segue destination="vXZ-lx-hvc" kind="modal" modalTransitionStyle="crossDissolve" id="6JN-bb-gVd"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cuf-SJ-tqI">
-                                        <rect key="frame" x="254" y="25" width="46" height="30"/>
+                                        <rect key="frame" x="261" y="25" width="39" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Create"/>
+                                        <state key="normal" backgroundImage="done.png"/>
                                         <connections>
                                             <segue destination="vXZ-lx-hvc" kind="modal" identifier="createTask" modalTransitionStyle="crossDissolve" id="OZp-AK-4Q8"/>
                                         </connections>
@@ -226,25 +226,25 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-67-Cih">
-                                                <rect key="frame" x="20" y="25" width="56" height="30"/>
+                                                <rect key="frame" x="20" y="25" width="42" height="39"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Tap me"/>
+                                                <state key="normal" backgroundImage="list_02.png"/>
                                                 <connections>
                                                     <action selector="showSidePanel:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="nIG-cm-oNG"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zFG-hh-scN">
-                                                <rect key="frame" x="254" y="25" width="43" height="30"/>
+                                                <rect key="frame" x="254" y="25" width="43" height="35"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Add"/>
+                                                <state key="normal" backgroundImage="add_02.png"/>
                                                 <connections>
                                                     <segue destination="oqJ-GC-Tgg" kind="modal" modalTransitionStyle="crossDissolve" id="Zx1-yv-5qb"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNe-Tj-xhC">
-                                                <rect key="frame" x="122" y="25" width="30" height="30"/>
+                                                <rect key="frame" x="107" y="28" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="TW">
+                                                <state key="normal" backgroundImage="twitter.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -252,9 +252,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M8u-mu-2s4">
-                                                <rect key="frame" x="168" y="25" width="30" height="30"/>
+                                                <rect key="frame" x="182" y="28" width="30" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="FB">
+                                                <state key="normal" backgroundImage="facebook.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
@@ -287,7 +287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="165" y="176"/>
+            <point key="canvasLocation" x="198" y="106"/>
         </scene>
         <!--Tasks View Controller-->
         <scene sceneID="s0U-R9-cik">
@@ -524,6 +524,14 @@
             <point key="canvasLocation" x="1621" y="1324"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="add_02.png" width="512" height="512"/>
+        <image name="back.png" width="512" height="512"/>
+        <image name="done.png" width="512" height="512"/>
+        <image name="facebook.png" width="512" height="512"/>
+        <image name="list_02.png" width="512" height="512"/>
+        <image name="twitter.png" width="512" height="512"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

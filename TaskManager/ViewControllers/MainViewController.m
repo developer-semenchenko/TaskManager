@@ -40,7 +40,17 @@ BOOL isShowingSideView = NO;
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
+    CATransform3D transform1 = CATransform3DMakeTranslation(0, 0, 0);
+    CATransform3D transform2 = CATransform3DMakeRotation((M_PI / 2) - 0, 0, -1, 0);
+    CATransform3D transform = CATransform3DConcat(transform2, transform1);
+    [self.sidePanel.layer setTransform:transform];
     
+    [self.sidePanel.layer setAnchorPoint:CGPointMake(1.0, 0.5)];
+
+    // set perspective of the transformation
+    CATransform3D transform3 = CATransform3DIdentity;
+    transform3.m34 = -1/500.0;
+    [self.view.layer setSublayerTransform:transform3];
     // Checking first time launch
     if ([userDefaults boolForKey:@"firstLaunch"])
     {
@@ -167,6 +177,11 @@ BOOL isShowingSideView = NO;
         self.buttonOptions.alpha = 1.0f;
         self.buttonAbout.alpha = 1.0f;
         
+        CATransform3D transform1 = CATransform3DMakeTranslation(70, 0, 0);
+        CATransform3D transform2 = CATransform3DMakeRotation((M_PI / 2) - 1.570796, 0, -1, 0);
+        CATransform3D transform = CATransform3DConcat(transform2, transform1);
+        [self.sidePanel.layer setTransform:transform];
+        
     }];
         isShowingSideView = YES;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"lockTableView" object:nil];
@@ -179,6 +194,13 @@ BOOL isShowingSideView = NO;
             self.buttonCompletedTasks.alpha = 0.0f;
             self.buttonOptions.alpha = 0.0f;
             self.buttonAbout.alpha = 0.0f;
+            
+            CATransform3D transform1 = CATransform3DMakeTranslation(0, 0, 0);
+            CATransform3D transform2 = CATransform3DMakeRotation((M_PI / 2) - 0, 0, -1, 0);
+            CATransform3D transform = CATransform3DConcat(transform2, transform1);
+            [self.sidePanel.layer setTransform:transform];
+
+            
         }];
         isShowingSideView = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockTableView" object:nil];

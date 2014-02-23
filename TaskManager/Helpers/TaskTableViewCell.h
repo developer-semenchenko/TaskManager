@@ -14,6 +14,7 @@
 
 // The item that this cell renders.
 @property (nonatomic) NSDictionary *taskItem;
+@property (nonatomic) NSNumber *cellID;
 
 // The object that acts as delegate for this cell.
 @property (nonatomic, assign) id<TaskTableViewDelegate> delegate;
