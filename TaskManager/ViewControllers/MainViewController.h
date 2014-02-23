@@ -12,9 +12,8 @@
 #import "ContainerViewController.h"
 #import "PageContentViewController.h"
 #import "TaskTableViewDelegate.h"
-//#import <MapKit/MapKit.h>
 
-@interface MainViewController : UIViewController <UIPageViewControllerDataSource/*, CLLocationManagerDelegate*/>
+@interface MainViewController : UIViewController <UIPageViewControllerDataSource>
 
 @property (strong, nonatomic) IBOutlet UIView *mainView;
 @property (weak, nonatomic) IBOutlet UIView *sidePanel;

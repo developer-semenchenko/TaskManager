@@ -40,17 +40,19 @@ BOOL isShowingSideView = NO;
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     
+    // Side panel transformation to default position
     CATransform3D transform1 = CATransform3DMakeTranslation(0, 0, 0);
     CATransform3D transform2 = CATransform3DMakeRotation((M_PI / 2) - 0, 0, -1, 0);
     CATransform3D transform = CATransform3DConcat(transform2, transform1);
+    [self.sidePanel.layer setAnchorPoint:CGPointMake(1.0, 0.5)];
     [self.sidePanel.layer setTransform:transform];
     
-    [self.sidePanel.layer setAnchorPoint:CGPointMake(1.0, 0.5)];
 
-    // set perspective of the transformation
+    // Set perspective of the transformation
     CATransform3D transform3 = CATransform3DIdentity;
     transform3.m34 = -1/500.0;
     [self.view.layer setSublayerTransform:transform3];
+    
     // Checking first time launch
     if ([userDefaults boolForKey:@"firstLaunch"])
     {
@@ -325,66 +327,5 @@ BOOL isShowingSideView = NO;
     }
 }
 
-
-#pragma mark - CLLocationManagerDelegate
-
-/*- (void)locationManager:(CLLocationManager *)manager
-      didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-{
-    if(state == CLRegionStateInside)
-    {
-        [self showMessage:@"CLRegionStateInside"];
-        NSLog(@"##Entered Region - %@", region.identifier);
-    }
-    else if(state == CLRegionStateOutside)
-    {
-        [self showMessage:@"CLRegionStateOutside"];
-        
-        UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-        localNotification.fireDate = [NSDate date];
-        localNotification.alertBody = @"CLRegionStateOutside";
-        localNotification.alertAction = @"Show me app";
-        localNotification.timeZone = [NSTimeZone defaultTimeZone];
-        localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-        
-        [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-        
-        
-        NSLog(@"##Exited Region - %@", region.identifier);
-    }
-    else{
-        [self showMessage:@"else state"];
-        NSLog(@"##Unknown state  Region - %@", region.identifier);
-    }
-}
-
-- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
-{
-    NSString *string = [[NSString alloc] initWithFormat:@"didStartMonitoringForRegion: %@", region];
-    [self showMessage:string];
-    
-    NSLog(@"Started monitoring %@ region", region.identifier);
-}
-- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-{
-    [self showMessage:@"didEnterRegion:"];
-    NSLog(@"Entered Region - %@", region.identifier);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
-{
-    [self showMessage:@"didExitRegion:"];
-    
-    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
-    localNotification.fireDate = [NSDate date];
-    localNotification.alertBody = @"CLRegionStateOutside";
-    localNotification.alertAction = @"Show me app";
-    localNotification.timeZone = [NSTimeZone defaultTimeZone];
-    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
-    
-    NSLog(@"Exited Region - %@", region.identifier);
-}*/
 
 @end

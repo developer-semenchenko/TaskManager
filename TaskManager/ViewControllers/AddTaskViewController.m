@@ -79,18 +79,16 @@
         // Retriving task ID
         NSMutableArray *taskID = [[TasksID loadTasksID] mutableCopy];
         NSNumber *taskIDNumber = [taskID objectAtIndex:0];
-        //NSString *stringID = [[NSString alloc] initWithFormat:@"%d", [taskIDNumber intValue]];
         
         NSDictionary *newTask = [[NSDictionary alloc] initWithObjectsAndKeys:[self.textField text], @"Task text", taskIDNumber, @"Id", nil];
         [TasksIO addTasksToFile:newTask];
         
+        // Save task ID to file
         int value = [taskIDNumber intValue];
         taskIDNumber = [NSNumber numberWithInt:value + 1];
         [taskID replaceObjectAtIndex:0 withObject:taskIDNumber];
         [TasksID saveTaskID:taskID];
-        
-        NSLog(@"Tasks %@", [TasksIO loadTasksFromFile]);
-        
+                
         // Add Location Manager
         if (self.enableLocationMonitoring.isOn){
             taskRegion = [[CLCircularRegion alloc] initWithCenter:taskPlace.coordinate radius:1 identifier:[self.textField text]];

@@ -6,17 +6,17 @@
 //  Copyright (c) 2014 Vladyslav Semenchenko. All rights reserved.
 //
 
-// Helper function to get path to myTasks.plist file
+// Helper function to get path to myTasksID.plist file
 NSString *pathToIDFile()
 {
     NSArray *pathList = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *pathToDoc = pathList[0];
     NSString *pathToIDFile = [[NSString alloc] initWithFormat:@"%@/myTasksID.plist", pathToDoc];
     
-    // Check if file myTasks.plist exist in Documents folder
+    // Check if file myTasksID.plist exist in Documents folder
     if (![[NSFileManager defaultManager] fileExistsAtPath:pathToIDFile])
     {
-        // If not - creting root array and writing to file
+        // If not - creting root array with 0 id and writing to file
         NSNumber *initNumber = [[NSNumber alloc] initWithInt:0];
 
         NSArray *rootArray = [[NSArray alloc] initWithObjects:initNumber, nil];

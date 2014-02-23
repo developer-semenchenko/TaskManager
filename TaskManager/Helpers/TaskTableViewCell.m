@@ -116,8 +116,8 @@ const float UI_CUES_WIDTH = 50.0f;
         if (_completeOnDragRelease) {
             
             // Mark the item as complete and update the UI state
-            NSLog(@"Completed");
             [self.delegate taskCompleted:self.taskItem];
+            return;
         }
         
         // If task deleted
